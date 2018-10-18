@@ -1,31 +1,31 @@
 #use sakila
-show tables
+show tables;
 
-select count(*) from information_schema.tables where table_schema='sakila'
+select count(*) from information_schema.tables where table_schema='sakila';
 
-select * from information_schema.columns where table_name='actor'
+select * from information_schema.columns where table_name='actor';
 
 #1a
-select first_name, last_name from sakila.actor
+select first_name, last_name from sakila.actor;
 #1b
-select upper(concat(first_name,' ', last_name)) as 'Actor Name' from sakila.actor
+select upper(concat(first_name,' ', last_name)) as 'Actor Name' from sakila.actor;
 #2a
-select * from sakila.actor where first_name='joe'
+select * from sakila.actor where first_name='joe';
 #2b
-select * from sakila.actor where last_name like '%gen%'
+select * from sakila.actor where last_name like '%gen%';
 #2c
-select * from sakila.actor where last_name like '%li%' order by last_name, first_name
+select * from sakila.actor where last_name like '%li%' order by last_name, first_name;
 #2d 
-select country_id, country from country where country in ('Afghanistan','Bangladesh','China')
+select country_id, country from country where country in ('Afghanistan','Bangladesh','China');
 #3a
 #select * from actor
 alter table actor
-add description blob
+add description blob;
 #3b
 alter table actor
-drop description
+drop description;
 #4a
-select last_name, count(*) as c from actor group by last_name order by c desc
+select last_name, count(*) as c from actor group by last_name order by c desc;
 #4b
 SELECT 
     last_name, COUNT(*) AS c
@@ -33,18 +33,18 @@ FROM
     actor
 GROUP BY last_name
 HAVING c > 2
-ORDER BY c DESC
+ORDER BY c DESC;
 #4c
 #select * from actor where last_name = 'williams'
 #select * from actor where first_name = 'groucho' and last_name ='williams'
-update actor set first_name = 'HARPO' where first_name = 'groucho' and last_name ='williams'
+update actor set first_name = 'HARPO' where first_name = 'groucho' and last_name ='williams';
 #4D
 #select * from actor where first_name='harpo'
-update actor set first_name ='GROUCHO' where actor_id = 172
+update actor set first_name ='GROUCHO' where actor_id = 172;
 #select * from actor where actor_id =172
 #5a
 #select * from address
-show create table address
+show create table address;
 #6a
 #select * from staff
 select 
@@ -53,7 +53,7 @@ select
     address
 from staff s
 	inner join address a
-    on s.address_id = a.address_id
+    on s.address_id = a.address_id;
 #6b
 #select * from payment
 select
@@ -66,7 +66,7 @@ from
 	staff s
     inner join payment p
     on s.staff_id = p.staff_id
-group by first_name, last_name
+group by first_name, last_name;
 
 #6c
 #film and actors per film; film_actor and film
@@ -85,7 +85,7 @@ join actor a
 	on fa.actor_id = a.actor_id
 join film f
 	on fa.film_id = f.film_id
-group by title
+group by title;
 
 #6d
 #select * from film where title ='Hunchback Impossible'
@@ -97,7 +97,7 @@ from
 join inventory i 
 	on f.film_id = i.film_id
 where title = 'Hunchback Impossible'
-group by title
+group by title;
 #6e
 #select * from payment
 #select * from customer
@@ -114,7 +114,7 @@ join payment p
 	on c.customer_id = p.customer_id
 group by last_name, first_name
 order by last_name, first_name
-
+;
 #7a
 
 select
@@ -123,18 +123,18 @@ from film
 where 
 	(title like 'K%' or title like 'Q%')
 and language_id in (select language_id from language where name ='english')
-
+;
 #7b
 #actors in alone trip with subqueries
-select * from actor
-select * from film_actor
+#select * from actor;
+#select * from film_actor
 select 
 	first_name,
     last_name
 from actor a
 where 
 	actor_id in (select actor_id from film_actor where film_id in 
-					(select film_id from film where title = 'Alone Trip'))
+					(select film_id from film where title = 'Alone Trip'));
                     
                     
 #7c
@@ -163,7 +163,7 @@ join country cou
 	on cou.country_id =ci.country_id
 where
 	country ='Canada'
-
+;
 #7d
 #family films
 /*
@@ -182,7 +182,7 @@ join film_category fc
 join category c 
 	on c.category_id = fc.category_id
 where c.name ='Family'	
-
+;
 #7e 
 #most frequently rented movies desc
 /*
@@ -203,7 +203,7 @@ join rental r
     
 group by title
 order by Rentals desc
-
+;
 #7f
 # business by store
 /*
@@ -227,13 +227,14 @@ join store st
 	on st.store_id = s.store_id
     
 group by store_id
-
+;
 #7g
 #store ID, city, and country.
+/*
 select * from store storeid, address_id
 select * from address address_id, city_id
 select * from city
-
+*/
 
 select
 	s.store_id,
