@@ -1,0 +1,64 @@
+hr{
+    background-color: rgb(214, 212, 212) !important;
+   
+    height: 1px !important;
+}
+
+.box{
+    /*min-height: 400px;*/
+    height:auto;
+    padding: 10px;
+    margin: 30px;
+    background:white;
+}
+body{
+    background-color: rgb(214, 212, 212) !important;
+    font-family: 'Times New Roman';
+}
+.navbar-brand{
+
+    background-color: #00A090 !important;
+    
+    color:white ;
+    margin-left: 100% !important;
+}
+.footer{
+    position: fixed;
+    width: 100%;
+   
+    bottom: 0;
+
+    color:white;
+
+}
+h2{
+    color:#00A090 !important;
+
+}
+h3{
+    color:#00A090 !important;
+}
+#myfoot{
+    background-color:grey;
+    text-align: center;
+}
+#footHR{
+    position: fixed;
+    width: 100%;
+  
+    background-color:#00A090 !important;
+    bottom: 0;
+    height: 3px !important;
+}
+#img25{
+    max-width: 25%;
+    max-height: 25%;
+    float:left;
+}
+#myText{
+    /*display: inline-block;*/
+}
+#img2{
+    max-width: 45%;
+    max-height: 45%;
+}
