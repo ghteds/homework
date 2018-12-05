@@ -1,6 +1,7 @@
 import pandas as pd 
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
+import time
 
 def scrape():
     #connect splint
@@ -19,18 +20,26 @@ def scrape():
     #jpl
     jplUrl='https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(jplUrl)
-    jplHTML=browser.html
-    jplSoup=bs(jplHTML,"html.parser")
-    browser.click_link_by_text(jplSoup.find('footer').a.text)
+    browser.click_link_by_partial_text('FULL IMAGE')
+    #need delay for page to load properly... maybe it's better to check if page is loaded b4 proceeding?
+    time.sleep(1)
+    #jplHTML=browser.html
+    #jplSoup=bs(jplHTML,"html.parser")
+    #browser.click_link_by_text(jplSoup.find('footer').a.text)
     #featured image (fi)
 
-    #fiHtml=browser.html
-    #fiSoup=bs(fiHtml,'html.parser')
+    fiHtml=browser.html
+    fiSoup=bs(fiHtml,'html.parser')
+    #print("--------- THis is our fiSoup type: " ,type(fiSoup))
     #theClass=fiSoup.find('img', class_='fancybox-image')
+    jplCoreUrl=fiSoup.find('img', class_='fancybox-image')['src']
+    #print("--------- THis is our class type: " ,type(theClass))
+    #print(theClass)
     #jplCoreUrl=theClass['src']
-    #jplUrlPrefix='https://www.jpl.nasa.gov' 
-    #jplImgUrl=jplUrlPrefix + jplCoreUrl
-    jplImgUrl=browser.url
+    #print("--------- THis is our object type: " ,type(jplCoreUrl))
+    jplUrlPrefix='https://www.jpl.nasa.gov' 
+    jplImgUrl=jplUrlPrefix + jplCoreUrl
+    #jplImgUrl=browser.url
 
     #jplImgUrl=backgroundImage[backgroundImage.find("(")+2:backgroundImage.find(")")-1]
     #weather
@@ -81,5 +90,6 @@ def scrape():
             'hemisphere_image_urls': mhDict \
         }
     return output
+
 
 #print(scrape())
