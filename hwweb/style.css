@@ -81,13 +81,7 @@ h3{
 }
 @media (max-width: 767px) {
 
-    .container-fluid {
-  
-      background-color: #00A090;
-  
-    }
-  
-    .navbar-toggle {
+      .navbar-toggle {
   
       background-color: #FFF;
   
