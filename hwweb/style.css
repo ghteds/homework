@@ -55,9 +55,11 @@ h3{
     max-height: 25%;
     float:left;
 }
+/*
 #myText{
-    /*display: inline-block;*/
+    display: inline-block;
 }
+*/
 #img2{
     max-width: 45%;
     max-height: 45%;
@@ -66,3 +68,40 @@ h3{
     max-width: 200%;
     max-height: 200%;
 }
+@media (max-width: 480px) {
+
+    .navbar-collapse {
+    
+        text-align: left;
+    
+    }
+    .navbar-brand{
+        margin-left: 0% !important;
+    }
+}
+@media (max-width: 767px) {
+
+    .container-fluid {
+  
+      background-color: #00A090;
+  
+    }
+  
+    .navbar-toggle {
+  
+      background-color: #FFF;
+  
+    }
+  
+    .navbar-nav{
+  
+      background-color: #FFF;
+  
+      border-radius: 10px;
+  
+    }
+    .navbar-brand{
+        margin-left: 0% !important;
+    }
+  
+  }
