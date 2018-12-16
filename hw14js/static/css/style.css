@@ -1,0 +1,3 @@
+.table-striped > tbody > tr:nth-of-type(even) > td:nth-child(2) {
+    background-color: blue; 
+}
