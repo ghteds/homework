@@ -10,7 +10,7 @@ var margin = {
 
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
-
+var circRadius=6
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
@@ -81,7 +81,8 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   circlesGroup.call(toolTip);
 
   circlesGroup.on("mouseover", function(data) {
-    toolTip.show(data);
+    toolTip.show(data, this);
+    console.log(data)
   })
     // onmouseout event
     .on("mouseout", function(data, index) {
@@ -95,11 +96,11 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 d3.csv("assets/data/data.csv").then(function(theData) {
  //if (err) throw err;
 //console.log('loaded csv')
-console.log(theData)
+//console.log(theData)
   // parse data
   theData.forEach(function(data) {
     data.abbr = data.abbr
-    console.log(data.abbr)
+    //console.log(data.abbr)
     data.poverty = +data.poverty
     //console.log(data.poverty)
     data.income = +data.income
@@ -110,7 +111,7 @@ console.log(theData)
 
   // xLinearScale function above csv import
   var xLinearScale = xScale(theData, chosenXAxis);
-  console.log("this is xLinearScale",xLinearScale)
+  //console.log("this is xLinearScale",xLinearScale)
 
   // Create y scale function
   var yLinearScale = d3.scaleLinear()
@@ -144,9 +145,39 @@ console.log(theData)
     /*.attr("class", function(d) {
         return "stateCircle " + d.abbr;
     })*/
+    /*circlesGroup
+    .append("text")
+    // We return the abbreviation to .text, which makes the text the abbreviation.
     .text(function(d) {
-        return d.abbr;
+      return d.abbr;
     })
+    // Now place the text using our scale.
+    .attr("dx", function(d) {
+      return xScale(d[curX]);
+    })
+    .attr("dy", function(d) {
+      // When the size of the text is the radius,
+      // adding a third of the radius to the height
+      // pushes it into the middle of the circle.
+      return yScale(d[curY]) + circRadius / 2.5;
+    })
+    .attr("font-size", circRadius)
+    .attr("class", "stateText")
+    */
+    // Hover Rules
+    /*.on("mouseover", function(d) {
+      // Show the tooltip
+      toolTip.show(d);
+      // Highlight the state circle's border
+      d3.select("." + d.abbr).style("stroke", "#323232");
+    })
+    .on("mouseout", function(d) {
+      // Remove tooltip
+      toolTip.hide(d);
+      // Remove highlight
+      d3.select("." + d.abbr).style("stroke", "#e3e3e3");
+    });
+    */
   // Create group for  2 x- axis labels
   var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
@@ -172,7 +203,7 @@ console.log(theData)
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Healthcare");
+    .text("Without Healthcare");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
